@@ -1,5 +1,7 @@
 # Chrome Extension for iLert Incidents 
 
+This will show the Incidents in the small popup and Chrome will notify on the new Incidents. CAVEATS: The poll is HARD coded to be done in every one minute.
+
 ## Get started
 
 Clone this repository, and then, in this directory:
