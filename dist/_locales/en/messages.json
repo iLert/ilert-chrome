@@ -1,0 +1,50 @@
+{
+  "l10nHello": {
+    "message": "Hello, React!",
+    "description": "Hello text for the popup."
+  },
+  "organizationPlaceholder": {
+    "message": "Organization",
+    "description": "Organization Placeholder"
+  },
+  "apiKeyPlaceholder": {
+    "message": "API Key, without 'Bearer'",
+    "description": "API Key Placeholder"
+  },
+  "loginTitle": {
+    "message": "Login",
+    "description": "Login Title"
+  },
+  "logoutTitle": {
+    "message": "Logout",
+    "description": "Login Title"
+  },
+  "getKey": {
+    "message": "Get API Key",
+    "description": "Get API Key"
+  },
+  "incidentsLoading": {
+    "message": "Incidents is Loading...",
+    "description": "Incidents Loading"
+  },
+  "incidentsTitle": {
+    "message": "Incidents",
+    "description": "Incidents Title"
+  },
+  "incidentsEmpty": {
+    "message": "No open Incidents found!",
+    "description": "Text to show if no incidents are found"
+  },
+  "inputEmpty": {
+    "message": "Please provide an Input",
+    "description": "Input is empty"
+  },
+  "notAvailable": {
+    "message": "N/A",
+    "description": "Not Available"
+  },
+  "acceptButton": {
+    "message": "Accept",
+    "description": "Accept Button Notification"
+  }
+}

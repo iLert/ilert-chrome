@@ -1,0 +1,235 @@
+{
+    "id": 0,
+    "summary": "string",
+    "details": "string",
+    "reportTime": "2021-09-25T21:47:35Z",
+    "resolvedOn": "2021-09-25T21:47:35Z",
+    "status": "PENDING",
+    "alertSource": {
+        "id": 0,
+        "teams": [
+            {
+                "id": 0,
+                "name": "string"
+            }
+        ],
+        "name": "string",
+        "iconUrl": "string",
+        "lightIconUrl": "string",
+        "darkIconUrl": "string",
+        "escalationPolicy": {
+            "id": 0,
+            "name": "string",
+            "escalationRules": [
+                {
+                    "user": {
+                        "id": 0,
+                        "username": "string",
+                        "firstName": "string",
+                        "lastName": "string",
+                        "email": "string",
+                        "mobile": {
+                            "regionCode": "string",
+                            "number": "string"
+                        },
+                        "landline": {
+                            "regionCode": "string",
+                            "number": "string"
+                        },
+                        "timezone": "Europe/Berlin",
+                        "position": "string",
+                        "department": "string",
+                        "avatarUrl": "string",
+                        "language": "DE",
+                        "role": "STAKEHOLDER",
+                        "notificationPreferences": [
+                            {
+                                "delay": 0,
+                                "method": "EMAIL"
+                            }
+                        ],
+                        "lowPriorityNotificationPreferences": [
+                            {
+                                "delay": 0,
+                                "method": "EMAIL"
+                            }
+                        ],
+                        "onCallNotificationPreferences": [
+                            {
+                                "beforeMin": 0,
+                                "method": "EMAIL"
+                            }
+                        ],
+                        "subscribedIncidentUpdateStates": [
+                            "ACCEPTED"
+                        ],
+                        "subscribedIncidentUpdateNotificationTypes": [
+                            "EMAIL"
+                        ]
+                    },
+                    "schedule": {
+                        "id": 0,
+                        "name": "string",
+                        "teams": [
+                            {
+                                "id": 0,
+                                "name": "string"
+                            }
+                        ],
+                        "timezone": "Europe/Berlin",
+                        "startsOn": "2021-09-25T21:47:35Z"
+                    },
+                    "escalationTimeout": 0
+                }
+            ],
+            "teams": [
+                {
+                    "id": 0,
+                    "name": "string"
+                }
+            ],
+            "repeating": false,
+            "frequency": 1,
+            "routingKey": "string"
+        },
+        "integrationType": "NAGIOS",
+        "integrationKey": "string",
+        "integrationUrl": "string",
+        "autoResolutionTimeout": "string",
+        "incidentCreation": "ONE_INCIDENT_PER_EMAIL",
+        "status": "PENDING",
+        "emailFiltered": false,
+        "emailResolveFiltered": false,
+        "active": true,
+        "emailPredicates": [
+            {
+                "field": "EMAIL_FROM",
+                "criteria": "CONTAINS_ANY_WORDS",
+                "value": "string"
+            }
+        ],
+        "emailResolvePredicates": [
+            {
+                "field": "EMAIL_FROM",
+                "criteria": "CONTAINS_ANY_WORDS",
+                "value": "string"
+            }
+        ],
+        "resolveKeyExtractor": {
+            "field": "EMAIL_SUBJECT",
+            "criteria": "ALL_TEXT_BEFORE",
+            "value": "string"
+        },
+        "filterOperator": "AND",
+        "resolveFilterOperator": "AND",
+        "incidentPriorityRule": "HIGH",
+        "supportHours": {
+            "timezone": "Europe/Berlin",
+            "autoRaiseIncidents": true,
+            "supportDays": {
+                "MONDAY": {
+                    "start": "string",
+                    "end": "string"
+                },
+                "TUESDAY": {
+                    "start": "string",
+                    "end": "string"
+                },
+                "WEDNESDAY": {
+                    "start": "string",
+                    "end": "string"
+                },
+                "THURSDAY": {
+                    "start": "string",
+                    "end": "string"
+                },
+                "FRIDAY": {
+                    "start": "string",
+                    "end": "string"
+                },
+                "SATURDAY": {
+                    "start": "string",
+                    "end": "string"
+                },
+                "SUNDAY": {
+                    "start": "string",
+                    "end": "string"
+                }
+            }
+        },
+        "heartbeat": {
+            "summary": "string",
+            "intervalSec": 0,
+            "status": "OVERDUE",
+            "lastPingReceivedAt": "2021-09-25T21:47:35Z"
+        },
+        "bidirectional": true,
+        "autotaskMetadata": {
+            "userName": "string",
+            "secret": "string",
+            "apiIntegrationCode": "string",
+            "webServer": "string"
+        }
+    },
+    "priority": "HIGH",
+    "incidentKey": "string",
+    "assignedTo": {
+        "id": 0,
+        "username": "string",
+        "firstName": "string",
+        "lastName": "string",
+        "email": "string",
+        "mobile": {
+            "regionCode": "string",
+            "number": "string"
+        },
+        "landline": {
+            "regionCode": "string",
+            "number": "string"
+        },
+        "timezone": "Europe/Berlin",
+        "position": "string",
+        "department": "string",
+        "avatarUrl": "string",
+        "language": "DE",
+        "role": "STAKEHOLDER",
+        "notificationPreferences": [
+            {
+                "delay": 0,
+                "method": "EMAIL"
+            }
+        ],
+        "lowPriorityNotificationPreferences": [
+            {
+                "delay": 0,
+                "method": "EMAIL"
+            }
+        ],
+        "onCallNotificationPreferences": [
+            {
+                "beforeMin": 0,
+                "method": "EMAIL"
+            }
+        ],
+        "subscribedIncidentUpdateStates": [
+            "ACCEPTED"
+        ],
+        "subscribedIncidentUpdateNotificationTypes": [
+            "EMAIL"
+        ]
+    },
+    "nextEscalation": "2021-09-25T21:47:35Z",
+    "images": [
+        {
+            "src": "string",
+            "href": "string",
+            "alt": "string"
+        }
+    ],
+    "links": [
+        {
+            "href": "string",
+            "text": "string"
+        }
+    ]
+}
