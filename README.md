@@ -10,7 +10,7 @@ This plugin shows the alerts in a small badge and Chrome will notify on new aler
 ## Get started (from release)
 
 1. Navigate to releases of this Github repository.
-1. Download the latest version archive
+1. Download the latest version archive [here](https://github.com/iLert/ilert-chrome/releases/download/v0.2.0/ilert_chrome.zip)
 1. Follow steps in `Installing the plugin` below
 
 ## Get started (from source)
