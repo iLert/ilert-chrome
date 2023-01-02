@@ -1,16 +1,32 @@
-import { IncidentsType } from "./interfaces";
+import { Alert } from "./interfaces";
 
-const MAX_INCIDENT_STRING_LENGTH = 25;
+let _INIT = true;
+let _ETAG = "0";
 
-const fetchAndAlertIncidents = async (organization: string, token: string, incidentStorageIds: number[]) => {
-  const response = await fetch("https://api.ilert.com/api/v1/incidents?state=PENDING&state=ACCEPTED", {
+export const IL_GLOB = {
+  USER_AGENT: "ilert-chrome/0.2.0",
+  MAX_ALERT_STRING_LENGTH: 25,
+  ILERT_URL: "https://api.ilert.com/api"
+};
+
+const fetchAlerts = async (_organization: string, token: string, alertStorageIds: number[]) => {
+
+  const response = await fetch(IL_GLOB.ILERT_URL + "/alerts?state=PENDING&state=ACCEPTED", {
     headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
+      "x-ilert-client": IL_GLOB.USER_AGENT,
+      "Accept": "application/json",
+      "Content-Type": "application/json",
+      "Authorization": !token.startsWith("Bearer ") ? `Bearer ${token}` : token,
+      "If-None-Match": _ETAG
     }
   });
+
   const status = response.status;
+
+  // cache / no changes
+  if(status == 304) {
+    return;
+  }
 
   if (status >= 400) {
     const responseBody = await response.text();
@@ -18,56 +34,90 @@ const fetchAndAlertIncidents = async (organization: string, token: string, incid
     return;
   }
 
-  const incidents: IncidentsType[] = await response.json();
-  chrome.storage.sync.set({incidentIds: incidents.map(incident => incident.id)});
+  const etag = response.headers.get("etag");
+  if(etag) {
+    _ETAG = etag;
+  }
 
-  const incidentsDiffs: IncidentsType[] = incidents
-    // Filter the incidents if it is not inside the stored Incident IDs
-    .filter(incident => !incidentStorageIds.some(incidentId => incidentId === incident.id));
+  const alerts: Alert[] = await response.json();
+  chrome.storage.sync.set({incidentIds: alerts.map(incident => incident.id)});
 
-  if (incidentsDiffs.length === 0) {
-    console.log('No new Incident found');
+  if (alerts.length <= 0) {
+    console.log("No new alerts found");
+    chrome.action.setBadgeBackgroundColor({color: "green"});
+    chrome.action.setBadgeText({text: "0"});
     return;
   }
 
-  incidentsDiffs.map(incident => {
+  let hasPendingAlerts = false;
+  alerts.forEach(alert => {
+    if(!hasPendingAlerts && alert.status == "PENDING") {
+      hasPendingAlerts = true;
+    }
+  });
+
+  // filter the alerts that are unknown -> new
+  // and alerts that are of low priority
+  const alertDiffs: Alert[] = alerts
+    .filter(alert => !alertStorageIds.some(alertId => alertId === alert.id))
+    .filter(alert => alert.priority != "LOW");
+
+  // never exceed 5 notifications at once
+  alertDiffs.length = Math.min(alertDiffs.length, 5);
+  alertDiffs.forEach((alert: Alert) => {
+
+    const notificationBody = alert.details
+      ? alert.details.length > IL_GLOB.MAX_ALERT_STRING_LENGTH
+        ? `${alert.details.slice(0, IL_GLOB.MAX_ALERT_STRING_LENGTH)}...`
+        : alert.details
+      : "This alert has no further details";
   
-    chrome.notifications.onClicked.addListener((incidentId: string) => {
-      const url = `https://${organization}.ilert.com/incident/view.jsf?id=${incidentId}`;
-      chrome.tabs.create({ url });
-    });
-  
-    chrome.notifications.create(`${incident.id}`, {
-        type: 'basic',
-        iconUrl: '../icons/icon48.png',
-        title: incident.summary,
-        message: incident.details.length > MAX_INCIDENT_STRING_LENGTH ? `${incident.details.slice(0, MAX_INCIDENT_STRING_LENGTH)}...` : incident.details,
-        priority: 2,
+    chrome.notifications.create(`${alert.id}`, {
+        type: "basic",
+        iconUrl: "../icons/icon48.png",
+        title: alert.summary,
+        message: notificationBody,
+        priority: 2
+    }, (id) => {
+      console.log(`Notification for alert ${id} created`);
     });
   });
 
-  chrome.browserAction.setBadgeBackgroundColor({color: "red"});
-  chrome.browserAction.setBadgeText({text: incidents.length.toString()});
-}
+  chrome.action.setBadgeBackgroundColor({color: hasPendingAlerts ? "red" : "blue"});
+  chrome.action.setBadgeText({text: alerts.length.toString()});
+};
 
-chrome.alarms.create('pollIncidents', {
+chrome.alarms.create("pollAlerts", {
   periodInMinutes: 1
 });
 
 chrome.alarms.onAlarm.addListener((alarm) => {
 
-  if (alarm.name !== 'pollIncidents') {
+  if (alarm.name !== "pollAlerts") {
     return;
   }
 
+  // incidents = legacy -> alerts
   chrome.storage.sync.get(["organization", "token", "incidentIds"], function (result) {
 
     if (!result.organization || !result.token || !result.incidentIds) {
-      console.log('No token or incidentIds found in the storage');
+      console.log("No token or alertIds (incidentIds) found in the storage");
       return;
     }
 
-    fetchAndAlertIncidents(result.organization, result.token, result.incidentIds);
+    const {
+      organization
+    } = result;
+
+    if(_INIT) {
+      _INIT = false;
+      console.log("init");
+      chrome.notifications.onClicked.addListener((alertId: string) => {
+        const url = `https://${organization}.ilert.com/incident/view.jsf?id=${alertId}`;
+        chrome.tabs.create({ url });
+      });
+    }
+
+    fetchAlerts(organization, result.token, result.incidentIds);
   });
 });
-

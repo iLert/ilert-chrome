@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import * as ReactDOM from "react-dom";
 
 import "../styles/popup.css"
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 import Login from "./Login";
-import Incidents from "./Incidents";
+import Alerts from "./Alerts";
 import { Credentials } from "../app/interfaces";
 
 const App: React.FC = () => {
@@ -22,7 +22,7 @@ const App: React.FC = () => {
     const creds: Credentials = { token: "", organization: "" };
     setCreds(creds);
     chrome.storage.sync.set(creds);
-    chrome.browserAction.setBadgeText({text: ""});
+    chrome.action.setBadgeText({text: ""});
     setIsLoggedIn(false);
   }
 
@@ -59,11 +59,11 @@ const App: React.FC = () => {
   return (
     !isLoggedIn ?
       <Login storeCredentials={storeCredentials} /> :
-      <Incidents creds={creds} logoutHandler={logoutHandler} />
+      <Alerts creds={creds} logoutHandler={logoutHandler} />
   )
 }
 
 ReactDOM.render(
   <App />,
-  document.getElementById('root')
+  document.getElementById("root")
 );

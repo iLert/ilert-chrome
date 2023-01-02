@@ -3,17 +3,17 @@ export interface Credentials {
     token: string;
 }
 
-export interface IncidentsType {
+export interface Alert {
     id: number;
     summary: string;
-    details: string;
+    details: string | null;
     reportTime: Date;
     resolvedOn: Date;
     status: string;
     alertSource: AlertSource;
     priority: string;
-    incidentKey: string;
-    assignedTo: AssignedTo;
+    alertKey: string;
+    assignedTo: User;
     nextEscalation: Date;
     images: Image[];
     links: Link[];
@@ -31,7 +31,7 @@ export interface AlertSource {
     integrationKey: string;
     integrationUrl: string;
     autoResolutionTimeout: string;
-    incidentCreation: string;
+    alertCreation: string;
     status: string;
     emailFiltered: boolean;
     emailResolveFiltered: boolean;
@@ -41,18 +41,10 @@ export interface AlertSource {
     resolveKeyExtractor: ResolveKeyExtractor;
     filterOperator: string;
     resolveFilterOperator: string;
-    incidentPriorityRule: string;
+    alertPriorityRule: string;
     supportHours: SupportHours;
     heartbeat: Heartbeat;
     bidirectional: boolean;
-    autotaskMetadata: AutotaskMetadata;
-}
-
-export interface AutotaskMetadata {
-    userName: string;
-    secret: string;
-    apiIntegrationCode: string;
-    webServer: string;
 }
 
 export interface ResolveKeyExtractor {
@@ -72,7 +64,7 @@ export interface EscalationPolicy {
 }
 
 export interface EscalationRule {
-    user: AssignedTo;
+    user: User;
     schedule: Schedule;
     escalationTimeout: number;
 }
@@ -90,7 +82,7 @@ export interface Team {
     name: string;
 }
 
-export interface AssignedTo {
+export interface User {
     id: number;
     username: string;
     firstName: string;
@@ -107,8 +99,8 @@ export interface AssignedTo {
     notificationPreferences: NotificationPreference[];
     lowPriorityNotificationPreferences: NotificationPreference[];
     onCallNotificationPreferences: OnCallNotificationPreference[];
-    subscribedIncidentUpdateStates: string[];
-    subscribedIncidentUpdateNotificationTypes: string[];
+    subscribedAlertUpdateStates: string[];
+    subscribedAlertUpdateNotificationTypes: string[];
 }
 
 export interface Landline {
@@ -135,7 +127,7 @@ export interface Heartbeat {
 
 export interface SupportHours {
     timezone: string;
-    autoRaiseIncidents: boolean;
+    autoRaiseAlerts: boolean;
     supportDays: SupportDays;
 }
 

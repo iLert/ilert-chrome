@@ -1,0 +1,40 @@
+{
+  "name": "ilert",
+  "version": "0.2.0",
+  "manifest_version": 2,
+  "description": "A Chrome extension for ilert alerts and live notifications",
+  "homepage_url": "https://ilert.com",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "browser_action": {
+    "default_title": "ilert alerts extension",
+    "default_popup": "app.html"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "https://*/*",
+    "storage",
+    "alarms",
+    "notifications"
+  ],
+  "content_security_policy": "script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' http://www.w3.org data:; default-src 'self' https://api.ilert.com",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*"
+      ],
+      "js": [
+        "js/content.js"
+      ]
+    }
+  ]
+}

@@ -1,16 +1,17 @@
 {
-  "name": "tsrwpcx",
-  "version": "1.0.0",
-  "description": "",
+  "name": "ilert-chrome",
+  "version": "0.2.0",
+  "description": "The ilert Chrome plugin",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "NODE_ENV=production npx webpack"
   },
   "keywords": [],
-  "author": "",
+  "author": "ilert",
   "license": "BSD-3-Clause",
   "devDependencies": {
-    "@types/chrome": "0.0.75",
+    "@types/chrome": "0.0.206",
     "@types/react": "^16.7.8",
     "@types/react-dom": "^16.0.11",
     "css-loader": "^1.0.1",
