@@ -2,7 +2,6 @@
 
 > Note: this plugin is still in BETA, we provide limited support, if you run into any issues or would like to provide feedback, feel free to open a Github issue on this repository
 
-![pin help](screenshots/alerts.png)
 ![pin help](screenshots/notification.png)
 
 This plugin shows the alerts in a small badge and Chrome will notify on new alerts.
@@ -64,3 +63,5 @@ The origanization is your "subdomain" e.g. myaccount.ilert.com -> `myaccount`
 #### When will this be available in the Chrome extension marketplace
 
 The plugin is already fully functional, however we will keep it in BETA for a while until we move it to GA and offer it as official Chrome extension
+
+![pin help](screenshots/alerts.png)
