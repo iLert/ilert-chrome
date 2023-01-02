@@ -3,6 +3,7 @@
 > Note: this plugin is still in BETA, we provide limited support, if you run into any issues or would like to provide feedback, feel free to open a Github issue on this repository
 
 ![pin help](screenshots/alerts.png)
+![pin help](screenshots/notification.png)
 
 This plugin shows the alerts in a small badge and Chrome will notify on new alerts.
 
