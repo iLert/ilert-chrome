@@ -1,4 +1,4 @@
-# Chrome Extension for ilert alerts
+# Chrome extension for ilert alerts
 
 > Note: this plugin is still in BETA, we provide limited support, if you run into any issues or would like to provide feedback, feel free to open a Github issue on this repository
 
