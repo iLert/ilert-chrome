@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "NODE_ENV=production npx webpack"
+    "build": "NODE_ENV=production npx webpack",
+    "zip": "zip -r ilert_chrome.zip ./dist -x '**/.*' -x '**/__MACOSX'",
+    "release": "npm run build && npm run zip"
   },
   "keywords": [],
   "author": "ilert",
